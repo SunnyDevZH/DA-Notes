@@ -18,8 +18,9 @@ export class NoteComponent {
   
   constructor(private noteService: NoteListService){}
 
-  changeMarkedStatus(){
+  async changeMarkedStatus(){
     this.note.marked = !this.note.marked;
+    await this.noteService.setFavorite(this.note.id, this.note.marked);
   }
 
   deleteHovered(){
@@ -32,24 +33,26 @@ export class NoteComponent {
     this.edit = true;
   }
 
-  closeEdit(){
+  async closeEdit(){
     this.edit = false;
-    this.saveNote();
+    await this.saveNote();
   }
 
-  moveToTrash(){
+  async moveToTrash(){
     this.note.type = 'trash';
+    await this.saveNote();
   }
 
-  moveToNotes(){
+  async moveToNotes(){
     this.note.type = 'note';
+    await this.saveNote();
   }
 
-  deleteNote(){
-
+  async deleteNote(){
+    await this.noteService.deleteNote(this.note.id);
   }
 
-  saveNote(){
-    
+  async saveNote(){
+    await this.noteService.updateNote(this.note);
   }
 }
