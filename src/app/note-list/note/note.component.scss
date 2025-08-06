@@ -23,9 +23,9 @@
 
     >p {
         width: 100%;
-        word-break: break-all;
         height: 124px;
         overflow: auto;
+        white-space: pre-line;
     }
 
 

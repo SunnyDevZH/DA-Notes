@@ -48,8 +48,8 @@ export class NoteComponent {
     await this.saveNote();
   }
 
-  async deleteNote(){
-    await this.noteService.deleteNote(this.note.id);
+  async deleteNote() {
+    await this.noteService.hardDeleteNote(this.note.id);
   }
 
   async saveNote(){

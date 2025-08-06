@@ -24,8 +24,18 @@ export class AddNoteDialogComponent {
     this.addDialogClosed.emit(false);
   }
 
-  addNote(){
-    //beachte das closeDialog() zum Schluss kommt, denn es leert die Variablen
+  async addNote() {
+    if (!this.title.trim() && !this.description.trim()) return;
+
+    const newNote: Note = {
+      id: '', // Firestore vergibt die ID automatisch
+      type: 'note',
+      title: this.title,
+      content: this.description,
+      marked: false
+    };
+
+    await this.noteService.addNote(newNote);
     this.closeDialog();
   }
 }

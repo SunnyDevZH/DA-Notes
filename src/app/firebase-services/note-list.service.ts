@@ -41,4 +41,9 @@ export class NoteListService {
     const noteRef = doc(this.firestore, 'notes', noteId);
     await updateDoc(noteRef, { marked });
   }
+
+  async hardDeleteNote(noteId: string): Promise<void> {
+    const noteRef = doc(this.firestore, 'notes', noteId);
+    await deleteDoc(noteRef);
+  }
 }
